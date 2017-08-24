@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">formacioktln</string>
+    <string name="hello_kotlin">Hello kotlin!</string>
+    <string name="icon_resource">icon resource</string>
+</resources>
