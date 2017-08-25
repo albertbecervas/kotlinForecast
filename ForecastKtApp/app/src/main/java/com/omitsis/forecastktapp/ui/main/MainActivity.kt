@@ -4,19 +4,31 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.omitsis.forecastktapp.BaseActivity
 import com.omitsis.forecastktapp.R
 import com.omitsis.forecastktapp.api.RetrofitApi
+import com.omitsis.forecastktapp.model.AppUser
 import com.omitsis.forecastktapp.model.ForecastList
 import kotlinx.android.synthetic.main.activity_jt_k.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import javax.inject.Inject
+import javax.inject.Named
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+
+//    @Inject
+//    lateinit var appUser: AppUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jt_k)
+
+        getActivityComponent().inject(this)
+
+//        var user: String? = appUser.userName
 
         setViews()
     }
