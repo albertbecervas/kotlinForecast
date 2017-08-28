@@ -34,6 +34,7 @@ class ForecastListAdapter(private val forecastList: ForecastList, private val it
                 itemView.maxTemperature.text = "${temp.max}"
                 itemView.minTemperature.text = "${temp.min}"
                 itemView.setOnClickListener { itemClick(this) }
+
             }
 
         }
