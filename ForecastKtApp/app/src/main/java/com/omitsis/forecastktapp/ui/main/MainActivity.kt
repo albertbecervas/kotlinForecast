@@ -2,7 +2,6 @@ package com.omitsis.forecastktapp.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.omitsis.forecastktapp.BaseActivity
@@ -16,9 +15,7 @@ import kotlinx.android.synthetic.main.activity_jt_k.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 import javax.inject.Inject
-import javax.inject.Named
 
 class MainActivity : BaseActivity() {
 
@@ -51,6 +48,7 @@ class MainActivity : BaseActivity() {
                 val forecastList = response.body()
 
                 val mAdapter = ForecastListAdapter(forecastList) {
+                    auxModel.city = forecastList.city
                     auxModel.forecast = it
                     startActivity(Intent(this@MainActivity, DetailActivity::class.java))
                 }
