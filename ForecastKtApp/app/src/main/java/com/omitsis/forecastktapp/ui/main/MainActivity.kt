@@ -1,5 +1,6 @@
 package com.omitsis.forecastktapp.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -9,6 +10,8 @@ import com.omitsis.forecastktapp.R
 import com.omitsis.forecastktapp.api.RetrofitApi
 import com.omitsis.forecastktapp.model.AppUser
 import com.omitsis.forecastktapp.model.ForecastList
+import com.omitsis.forecastktapp.model.auxModel
+import com.omitsis.forecastktapp.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_jt_k.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,8 +22,8 @@ import javax.inject.Named
 
 class MainActivity : BaseActivity() {
 
-//    @Inject
-//    lateinit var appUser: AppUser
+    @Inject
+    lateinit var appUser: AppUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +31,7 @@ class MainActivity : BaseActivity() {
 
         getActivityComponent().inject(this)
 
-//        var user: String? = appUser.userName
+        var user: String? = appUser.userName
 
         setViews()
     }
@@ -47,7 +50,10 @@ class MainActivity : BaseActivity() {
             override fun onResponse(call: Call<ForecastList>, response: Response<ForecastList>) {
                 val forecastList = response.body()
 
-                val mAdapter = ForecastListAdapter(forecastList) { toast(it.pressure.toString()) }
+                val mAdapter = ForecastListAdapter(forecastList) {
+                    auxModel.forecast = it
+                    startActivity(Intent(this@MainActivity, DetailActivity::class.java))
+                }
 
                 val mLayoutManager = LinearLayoutManager(applicationContext)
                 recycler.layoutManager = mLayoutManager
